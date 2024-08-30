@@ -3,11 +3,10 @@ package com.fatec.controle_financeiro.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 //http://localhost:8090/api/exercicios1
 @RestController
@@ -28,6 +27,13 @@ public class Exercicio1Controller {
     //parametro {nome}
     @GetMapping("/reverter-nome/{nome}")
     String reverterNome(@PathVariable String nome) {
+        return new StringBuilder(nome).reverse().toString();
+    }
+
+    //@RequestBody = anotacao defini que irei passar parametro no corpo da requisicao
+    //Só consigo passar no corpo da requisição se utilizar verbo POST (@PostMapping)
+    @PostMapping("/reverter-nome-requisicao-corpo")
+    String reverterNomeRequisicaoCorpo(@RequestBody String nome) {
         return new StringBuilder(nome).reverse().toString();
     }
 
@@ -79,7 +85,36 @@ public class Exercicio1Controller {
         }
     }
 
+    public static class User {
+        private String name;
+        private int age;
 
+        // Construtor padrão
+        public User() {
+        }
 
+        // Getters e Setters
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@RequestBody User user) {
+        return "Bem-vindo, " + user.getName() + "! Você tem " + user.getAge() + " anos.";
+    }
 
 }
+
