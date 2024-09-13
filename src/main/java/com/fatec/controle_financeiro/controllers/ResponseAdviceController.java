@@ -24,4 +24,9 @@ public class ResponseAdviceController {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIlegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body("Usuario inválido") ; 
+    }
+
 }
