@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -39,7 +40,6 @@ public class ClienteController {
         clientes.add(cliente);
 
         return new ResponseEntity<>(cliente, HttpStatus.CREATED);*/
-
         Cliente clienteCreated = clienteRepository.save(cliente);
         return new ResponseEntity<>(clienteCreated, HttpStatus.CREATED);
     }
@@ -48,7 +48,7 @@ public class ClienteController {
     //READ
     @GetMapping()
     public ResponseEntity<List<Cliente>> getAllCliente() {
-
+        //SELECT * FROM CLIENTES
         List<Cliente> clientes = clienteRepository.findAll();
 
         return new ResponseEntity<>(clientes, HttpStatus.OK);
@@ -56,20 +56,28 @@ public class ClienteController {
     
     @GetMapping("{id}")
     public ResponseEntity<Cliente> getById(@PathVariable int id) {
-        for (Cliente cliente : clientes) {
+        /*for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
                 return new ResponseEntity<>(cliente, HttpStatus.OK);
             }
         }
         // Se o cliente não for encontrado, retorna status 404 Not Found
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+
+        //select * from cliente where id = {id}
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        if (cliente.isPresent()) {
+            return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     
     //UPDATE
     @PutMapping("{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable int id, @RequestBody Cliente entity) {
-         // Percorre a lista de clientes para encontrar o cliente com o ID correspondente
-         for (Cliente cliente : clientes) {
+        // Percorre a lista de clientes para encontrar o cliente com o ID correspondente
+        /*for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
                 // Se o cliente for encontrado, atualiza suas informações
                 cliente.setName(entity.getName());
@@ -78,14 +86,23 @@ public class ClienteController {
             }
         }
         // Se o cliente não for encontrado, retorna status 404 Not Found
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+
+        Optional<Cliente> clienteAtual = clienteRepository.findById(id);
+        if (clienteAtual.isPresent()) {
+            entity.setId(id);
+            clienteRepository.save(entity);
+            return new ResponseEntity<>(entity, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+        }
     }
 
     //DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable int id) {
         // Percorre a lista de clientes para encontrar o cliente com o ID correspondente
-        for (Cliente cliente : clientes) {
+       /*for (Cliente cliente : clientes) {
             if (cliente.getId() == id) {
                 // Se o cliente for encontrado, remove-o da lista
                 clientes.remove(cliente);
@@ -94,6 +111,14 @@ public class ClienteController {
             }
         }
         // Se o cliente não for encontrado, retorna status 404 Not Found
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);*/
+
+        Optional<Cliente> clienteAtual = clienteRepository.findById(id);
+        if (clienteAtual.isPresent()) {
+            clienteRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
