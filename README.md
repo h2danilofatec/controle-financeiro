@@ -5,7 +5,7 @@ Projeto desenvolvido durante as aulas do 5º ciclo do curso de Análise e Desenv
 ## Participantes
 
 - **Amanda França Marino Santos Lopes Paes** - [Mandy-Marino](https://github.com/Mandy-Marino)
-- **Gabriel Rodrigues de Oliveira** - Owner
+- **Gabriel Rodrigues de Oliveira** - [GabRodrigues23](https://github.com/GabRodrigues23)
 - **Gustavo Cesar Kravszenko** - [Kravszenko](https://github.com/Kravszenko)
 - **Gustavo Henrique Meira Souza** - [gusmeira88](https://github.com/gusmeira88)
 - **Neemias Borges de Matos** - [NeemiasBorges](https://github.com/NeemiasBorges)
@@ -29,4 +29,4 @@ Este projeto visa fornecer uma plataforma simples e eficaz para o controle de cl
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/GabRodrigues23/controle-financeiro.git
+   https://github.com/GabRodrigues23/controle-financeiro/tree/dev
