@@ -1,4 +1,4 @@
-package com.fatec.controle_financeiro.controllers;
+package com.fatec.controle_financeiro.exercicios_controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

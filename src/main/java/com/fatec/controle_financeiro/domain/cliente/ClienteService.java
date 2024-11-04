@@ -1,10 +1,9 @@
 package com.fatec.controle_financeiro.domain.cliente;
 
-import com.fatec.controle_financeiro.entities.Cliente;
-import org.springframework.beans.factory.annotation.Autowired;
+//import com.fatec.controle_financeiro.entities.Cliente;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import java.util.List;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ClienteService {

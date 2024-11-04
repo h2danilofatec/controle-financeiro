@@ -1,4 +1,4 @@
-package com.fatec.controle_financeiro.controllers;
+package com.fatec.controle_financeiro.exercicios_controllers;
 
 import java.util.ArrayList;
 import java.util.List;

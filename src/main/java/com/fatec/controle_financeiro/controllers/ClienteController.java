@@ -1,9 +1,9 @@
 package com.fatec.controle_financeiro.controllers;
-
+import com.fatec.controle_financeiro.entities.User;
+import com.fatec.controle_financeiro.entities.Cliente;
 import com.fatec.controle_financeiro.domain.cliente.ClienteRepository;
 import com.fatec.controle_financeiro.domain.cliente.ClienteService;
-import com.fatec.controle_financeiro.entities.Cliente;
-import com.fatec.controle_financeiro.entities.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,6 @@ public class ClienteController {
         Cliente clienteCreated = clienteRepository.save(cliente);
         return new ResponseEntity<>(clienteCreated, HttpStatus.CREATED);
     }
-
 
     //READ
     @GetMapping()
