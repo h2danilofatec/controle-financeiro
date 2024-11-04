@@ -60,7 +60,6 @@ public class ContasReceberController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     // DELETE

@@ -1,13 +1,13 @@
 package com.fatec.controle_financeiro.controllers;
-
 import com.fatec.controle_financeiro.domain.cliente.ClienteRepository;
 import com.fatec.controle_financeiro.domain.fornecedor.FornecedorRepository;
 import com.fatec.controle_financeiro.entities.Cliente;
 import com.fatec.controle_financeiro.entities.Fornecedor;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,6 @@ public class FornecedorController {
 
     @Autowired
     private FornecedorRepository fornecedorRepository;
-
-    //CRUD = CREATE, READ, UPDATE E DELETE
     
     //CREATE    
     @PostMapping()
