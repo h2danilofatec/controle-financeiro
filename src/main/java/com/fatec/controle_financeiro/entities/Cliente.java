@@ -1,27 +1,35 @@
 package com.fatec.controle_financeiro.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false, length = 60)
     private String name;
 
+    @OneToMany(mappedBy = "clientes")
+    private List<ContasReceber> ContasReceber;
+
     public Cliente() { }
 
-    public Cliente(int id, String name) {
+    public Cliente(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() { return id; }
+    public Long getId() { 
+        return id; 
+    }
 
-    public void setId(int id) { this.id = id; }
+    public void setId(Long id) { 
+        this.id = id; 
+    }
 
     public String getName() {
         return name;

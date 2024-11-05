@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api/fornecedor")
 public class FornecedorController {
@@ -51,7 +50,7 @@ public class FornecedorController {
         }
     }
 
-    //DELETE
+    // DELETE
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFornecedor(@PathVariable Long id) {
         try {

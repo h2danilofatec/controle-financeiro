@@ -1,7 +1,6 @@
 package com.fatec.controle_financeiro.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,11 +10,10 @@ public class Fornecedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O nome do Fornecedor é obrigatório.")
     @Column(nullable = false, length = 60)
     private String name;
 
-    @OneToMany(mappedBy = "fornecedor")
+    @OneToMany(mappedBy = "fornecedores")
     private List<ContasPagar> contasPagar;
 
     public Fornecedor() { }

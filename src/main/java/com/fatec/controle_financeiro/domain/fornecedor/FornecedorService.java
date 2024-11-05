@@ -15,8 +15,8 @@ public class FornecedorService {
     }
 
    @Transactional
-    public Fornecedor create(Fornecedor forn) {
-        return fornecedorRepository.save(forn);
+    public Fornecedor create(Fornecedor fornecedor) {
+        return fornecedorRepository.save(fornecedor);
     }
 
     public List<Fornecedor> findAll() {
