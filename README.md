@@ -29,7 +29,7 @@ Este projeto visa fornecer uma plataforma simples e eficaz para o controle de cl
 
 1. Clone o repositório:
    ```bash
-   https://github.com/GabRodrigues23/controle-financeiro/tree/dev
+   https://github.com/GabRodrigues23/controle-financeiro.git
 
 2. Importe os Endpoints no HoppScotch:
    ```file

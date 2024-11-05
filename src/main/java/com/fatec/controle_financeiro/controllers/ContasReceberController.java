@@ -36,8 +36,8 @@ public class ContasReceberController {
     @GetMapping("/read/{id}")
     public ResponseEntity<ContasReceber> getById(@PathVariable Long id) {
         return receberService.findById(id)
-                .map(receber -> new ResponseEntity<>(receber, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        .map(receber -> new ResponseEntity<>(receber, HttpStatus.OK))
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     // UPDATE

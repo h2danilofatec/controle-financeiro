@@ -1,8 +1,7 @@
 package com.fatec.controle_financeiro.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -76,7 +75,7 @@ public class ContasReceber {
 
     @PrePersist
     @PreUpdate
-    private void validarDatar(){
+    private void validarData(){
         if(emissao != null && vencimento != null && emissao.isAfter(vencimento)){
             throw new IllegalArgumentException("A data de emissão não pode ser posterior à data de vencimento.");
         }
