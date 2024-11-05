@@ -12,16 +12,13 @@ public class Cliente {
     @Column(nullable = false, length = 60)
     private String name;
 
-    // Construtor padrão
-    public Cliente() {
-    }
+    public Cliente() { }
 
     public Cliente(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    // Getters e Setters
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
@@ -33,5 +30,4 @@ public class Cliente {
     public void setName(String name) {
         this.name = name;
     }
-
 }

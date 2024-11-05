@@ -24,7 +24,7 @@ public class ContasReceber {
     @Column(name = "valor", precision = 12, scale = 2)
     private BigDecimal valor;
     
-    public void ContasReceber() {} // Constructor
+    public void ContasReceber() { } // Constructor
     
     public Long getId(){
         return id;

@@ -9,20 +9,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //Desabilitar qdo quiser trabalhar com @Valid
-    //@NotBlank(message = "O nome não pode estar em branco.")
     @Column(nullable = false, length = 60)
     private String name;
 
-    //Desabilitar qdo quiser trabalhar com @Valid
-    //@NotNull(message = "A idade é obrigatória.")
-    //@Min(value = 0, message = "A idade não pode ser negativa.")
     @Column()
     private int age;
 
-    // Construtor padrão
-    public User() {
-    }
+    public User() { }
 
     public User(int id, String name, int age) {
         this.id = id;
@@ -30,7 +23,6 @@ public class User {
         this.age = age;
     }
 
-    // Getters e Setters
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
@@ -50,5 +42,4 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
-
 }
