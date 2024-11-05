@@ -1,7 +1,6 @@
 package com.fatec.controle_financeiro.controllers;
 import com.fatec.controle_financeiro.entities.ContasReceber;
 import com.fatec.controle_financeiro.domain.contasreceber.ContasReceberRepository;
-import com.fatec.controle_financeiro.domain.contasreceber.ContasReceberService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RestController
 @RequestMapping("/api/contasreceber")
 public class ContasReceberController {
@@ -25,21 +22,22 @@ public class ContasReceberController {
     private List<ContasReceber> receber = new ArrayList<>();
     private int proximoId = 1;
 
-    // CREATE
-    @PostMapping()
+    //CREATE
+    @PostMapping("/create")
     public ResponseEntity<ContasReceber> create(@RequestBody ContasReceber receber){
         ContasReceber receberCreated = receberRepository.save(receber);
         return new ResponseEntity<>(receberCreated, HttpStatus.CREATED);
     }
 
-    // READ (SELECT)
-    @GetMapping()
+    //READ
+    ///READ ALL
+    @GetMapping("/read")
     public ResponseEntity<List<ContasReceber>> getAllReceber(){
         List<ContasReceber> contasReceber = receberRepository.findAll();
         return new ResponseEntity<>(contasReceber, HttpStatus.OK);
     }
-
-    @GetMapping("{id}")
+    ///READ BY ID
+    @GetMapping("/read/{id}")
     public ResponseEntity<ContasReceber> getById(@PathVariable Long id){
         Optional<ContasReceber> receber = receberRepository.findById(id);
         if(receber.isPresent()){
@@ -49,8 +47,8 @@ public class ContasReceberController {
         }
     }
 
-    // UPDATE
-    @PutMapping("{id}")
+    //UPDATE
+    @PutMapping("/update/{id}")
     public ResponseEntity<ContasReceber> updateReceber(@PathVariable Long id, @RequestBody ContasReceber entity){
         Optional<ContasReceber> receberAtual = receberRepository.findById(id);
         if(receberAtual.isPresent()){
@@ -62,8 +60,8 @@ public class ContasReceberController {
         }
     }
 
-    // DELETE
-    @DeleteMapping("/{id}")
+    //DELETE
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteReceber(@PathVariable Long id){
         Optional<ContasReceber> receberAtual = receberRepository.findById(id);
         if (receberAtual.isPresent()) {

@@ -1,7 +1,5 @@
 package com.fatec.controle_financeiro.controllers;
-import com.fatec.controle_financeiro.domain.cliente.ClienteRepository;
 import com.fatec.controle_financeiro.domain.fornecedor.FornecedorRepository;
-import com.fatec.controle_financeiro.entities.Cliente;
 import com.fatec.controle_financeiro.entities.Fornecedor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,23 +19,23 @@ public class FornecedorController {
     private FornecedorRepository fornecedorRepository;
     
     //CREATE    
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<Fornecedor> create(@RequestBody Fornecedor fornecedor) {
 
         Fornecedor created = fornecedorRepository.save(fornecedor);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-
     //READ
-    @GetMapping()
+    ///READ ALL
+    @GetMapping("/read")
     public ResponseEntity<List<Fornecedor>> getAllFornecedor() {
         List<Fornecedor> fornecedores = fornecedorRepository.findAll();
 
         return new ResponseEntity<>(fornecedores, HttpStatus.OK);
     }
-    
-    @GetMapping("{id}")
+    ///READ BY ID
+    @GetMapping("/read/{id}")
     public ResponseEntity<Fornecedor> getById(@PathVariable int id) {
         Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
         if (fornecedor.isPresent()) {
@@ -49,7 +46,7 @@ public class FornecedorController {
     }
     
     //UPDATE
-    @PutMapping("{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable int id, @RequestBody Fornecedor entity) {
         Optional<Fornecedor> fornecedorAtual = fornecedorRepository.findById(id);
         if (fornecedorAtual.isPresent()) {
@@ -62,7 +59,7 @@ public class FornecedorController {
     }
 
     //DELETE
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFornecedor(@PathVariable int id) {
         Optional<Fornecedor> fornecedorAtual = fornecedorRepository.findById(id);
         if (fornecedorAtual.isPresent()) {

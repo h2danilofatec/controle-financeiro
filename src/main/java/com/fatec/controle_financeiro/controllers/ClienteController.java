@@ -1,8 +1,6 @@
 package com.fatec.controle_financeiro.controllers;
-import com.fatec.controle_financeiro.entities.User;
 import com.fatec.controle_financeiro.entities.Cliente;
 import com.fatec.controle_financeiro.domain.cliente.ClienteRepository;
-import com.fatec.controle_financeiro.domain.cliente.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,21 +23,22 @@ public class ClienteController {
     private int proximoId = 1;
 
     //CREATE    
-    @PostMapping("/registrar")
+    @PostMapping("/create")
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
         Cliente clienteCreated = clienteRepository.save(cliente);
         return new ResponseEntity<>(clienteCreated, HttpStatus.CREATED);
     }
 
     //READ
-    @GetMapping("/readAll")
+    ///READ ALL
+    @GetMapping("/read")
     public ResponseEntity<List<Cliente>> getAllCliente() {
         //SELECT * FROM CLIENTES
         List<Cliente> clientes = clienteRepository.findAll();
 
         return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
-    
+    ///READ BY ID
     @GetMapping("/read/{id}")
     public ResponseEntity<Cliente> getById(@PathVariable int id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -49,7 +48,7 @@ public class ClienteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
     //UPDATE
     @PutMapping("/update/{id}")
     public ResponseEntity<Cliente> updateCliente(@PathVariable int id, @RequestBody Cliente entity) {

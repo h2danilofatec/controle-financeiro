@@ -13,7 +13,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     // Busca por nome usando LIKE %nameparam%
     List<Cliente> findAllByNameContaining(String name);
 
-    //// Busca por nome usando LIKE com query manual
+    /// Busca por nome usando LIKE com query manual
     @Query("SELECT c FROM Cliente c WHERE c.name LIKE %:name%")
     List<Cliente> buscarClientesPorNome(@Param("name") String name);
 }
