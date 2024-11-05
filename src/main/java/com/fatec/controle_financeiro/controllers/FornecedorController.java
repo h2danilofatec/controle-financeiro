@@ -1,71 +1,63 @@
 package com.fatec.controle_financeiro.controllers;
-import com.fatec.controle_financeiro.domain.fornecedor.FornecedorRepository;
 import com.fatec.controle_financeiro.entities.Fornecedor;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.fatec.controle_financeiro.domain.fornecedor.FornecedorService;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/api/fornecedor")
 public class FornecedorController {
-
-    @Autowired
-    private FornecedorRepository fornecedorRepository;
+    private FornecedorService fornecedorService;
     
-    //CREATE    
+    public FornecedorController(FornecedorService fornecedorService) {
+        this.fornecedorService = fornecedorService;
+    }
+
+    // CREATE    
     @PostMapping("/create")
     public ResponseEntity<Fornecedor> create(@RequestBody Fornecedor fornecedor) {
-
-        Fornecedor created = fornecedorRepository.save(fornecedor);
-        return new ResponseEntity<>(created, HttpStatus.CREATED);
+        Fornecedor fornecedorCreated = fornecedorService.create(fornecedor);
+        return new ResponseEntity<>(fornecedorCreated, HttpStatus.CREATED);
     }
 
-    //READ
-    ///READ ALL
+    // READ ALL
     @GetMapping("/read")
     public ResponseEntity<List<Fornecedor>> getAllFornecedor() {
-        List<Fornecedor> fornecedores = fornecedorRepository.findAll();
-
+        List<Fornecedor> fornecedores = fornecedorService.findAll();
         return new ResponseEntity<>(fornecedores, HttpStatus.OK);
     }
-    ///READ BY ID
+    // READ BY ID
     @GetMapping("/read/{id}")
-    public ResponseEntity<Fornecedor> getById(@PathVariable int id) {
-        Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
-        if (fornecedor.isPresent()) {
-            return new ResponseEntity<>(fornecedor.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Fornecedor> getById(@PathVariable Long id) {
+        return fornecedorService.findById(id)
+        .map(fornecedor -> new ResponseEntity<>(fornecedor, HttpStatus.OK))
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
-    //UPDATE
+    // UPDATE
     @PutMapping("/update/{id}")
-    public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable int id, @RequestBody Fornecedor entity) {
-        Optional<Fornecedor> fornecedorAtual = fornecedorRepository.findById(id);
-        if (fornecedorAtual.isPresent()) {
-            entity.setId(id);
-            fornecedorRepository.save(entity);
-            return new ResponseEntity<>(entity, HttpStatus.OK);
-        } else {
+    public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable Long id, @RequestBody Fornecedor entity) {
+        try {
+            Fornecedor updated = fornecedorService.update(id, entity);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     //DELETE
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteFornecedor(@PathVariable int id) {
-        Optional<Fornecedor> fornecedorAtual = fornecedorRepository.findById(id);
-        if (fornecedorAtual.isPresent()) {
-            fornecedorRepository.deleteById(id);
+    public ResponseEntity<Void> deleteFornecedor(@PathVariable Long id) {
+        try {
+            fornecedorService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
+        } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
