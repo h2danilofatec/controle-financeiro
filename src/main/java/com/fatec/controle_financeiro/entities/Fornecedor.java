@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "fornecedores")
+@Table(name = "fornecedor")
 public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Fornecedor {
     @Column(nullable = false, length = 60)
     private String name;
 
-    @OneToMany(mappedBy = "fornecedores")
+    @OneToMany(mappedBy = "fornecedor")
     private List<ContasPagar> contasPagar;
 
     public Fornecedor() { }
