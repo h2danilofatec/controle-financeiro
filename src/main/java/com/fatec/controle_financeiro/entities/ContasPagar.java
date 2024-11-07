@@ -18,7 +18,7 @@ public class ContasPagar {
     private LocalDate emissao;
 
     @NotNull(message = "A data de vencimento é obrigatória.")
-    @Column(name = "vencimento")
+    @Column(name =  "vencimento")
     private LocalDate vencimento;
 
     @ManyToOne
