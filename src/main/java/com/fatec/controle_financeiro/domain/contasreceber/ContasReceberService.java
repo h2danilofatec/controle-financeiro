@@ -15,8 +15,8 @@ public class ContasReceberService {
     }
 
     @Transactional
-    public ContasReceber create(ContasReceber conta) {
-        return contasReceberRepository.save(conta);
+    public ContasReceber create(ContasReceber receber) {
+        return contasReceberRepository.save(receber);
     }
 
     public List<ContasReceber> findAll() {
