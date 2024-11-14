@@ -1,4 +1,4 @@
-package com.fatec.controle_financeiro.entities;
+package com.fatec.controle_financeiro.exercicios_controllers;
 
 import jakarta.persistence.*;
 

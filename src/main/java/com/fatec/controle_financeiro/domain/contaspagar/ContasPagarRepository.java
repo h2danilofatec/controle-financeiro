@@ -1,6 +1,11 @@
 package com.fatec.controle_financeiro.domain.contaspagar;
-import com.fatec.controle_financeiro.entities.ContasPagar;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ContasPagarRepository extends JpaRepository<ContasPagar, Long> { }
+import java.time.LocalDate;
+import java.util.Optional;
+
+import com.fatec.controle_financeiro.entities.ContasPagar;
+
+public interface ContasPagarRepository extends JpaRepository<ContasPagar, Long> { 
+    Optional<ContasPagar> findByDataEmissao(LocalDate emissao);
+}

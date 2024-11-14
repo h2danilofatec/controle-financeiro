@@ -72,12 +72,4 @@ public class ContasReceber {
     public void setValor(BigDecimal valor){
         this.valor = valor;
     }
-
-    @PrePersist
-    @PreUpdate
-    private void validarData(){
-        if(emissao != null && vencimento != null && emissao.isAfter(vencimento)){
-            throw new IllegalArgumentException("A data de emissão não pode ser posterior à data de vencimento.");
-        }
-    }
 }
