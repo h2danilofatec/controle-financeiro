@@ -14,21 +14,21 @@ public class ContasPagar {
     private Long id;
 
     @NotNull(message = "A data de emissão é obrigatória.")
-    @Column(name = "emissao")
+    @Column(name = "emissao", nullable = false)
     private LocalDate emissao;
 
     @NotNull(message = "A data de vencimento é obrigatória.")
-    @Column(name = "vencimento")
+    @Column(name = "vencimento", nullable = false)
     private LocalDate vencimento;
 
     @ManyToOne
-    @JoinColumn(name = "fornecedor_id")
+    @JoinColumn(name = "fornecedor_id", nullable = false)
     @NotNull(message = "O Fornecedor é obrigatório.")
     private Fornecedor fornecedor;
 
     @NotNull(message = "O valor é obrigatório.")
-    @DecimalMin(value = "0.01", inclusive = true, message = "O valor deve ser maior que zero.")
-    @Column(name = "valor", precision = 12, scale = 2)
+    @DecimalMin(value = "0.01", inclusive = true)
+    @Column(name = "valor", precision = 12, scale = 2, nullable = false)
     private BigDecimal valor;
 
     public ContasPagar() {} // Constructor
