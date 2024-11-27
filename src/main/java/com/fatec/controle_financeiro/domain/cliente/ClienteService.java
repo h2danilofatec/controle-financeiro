@@ -16,6 +16,9 @@ public class ClienteService {
 
    @Transactional
     public Cliente create(Cliente cliente) {
+        if (cliente.getName() == null) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");           
+        }
         return clienteRepository.save(cliente);
     }
 
