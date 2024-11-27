@@ -1,6 +1,8 @@
 package com.fatec.controle_financeiro.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 @Entity
@@ -10,6 +12,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "O nome do Cliente é obrigatório.")
     @Column(nullable = false, length = 60)
     private String name;
 

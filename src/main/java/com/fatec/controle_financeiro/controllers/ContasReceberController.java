@@ -20,9 +20,18 @@ public class ContasReceberController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<ContasReceber> create(@RequestBody ContasReceber receber) {
-        ContasReceber receberCreated = receberService.create(receber);
-        return new ResponseEntity<>(receberCreated, HttpStatus.CREATED);
+    public ResponseEntity<?> create(@RequestBody ContasReceber receber) {
+        try {
+            ContasReceber receberCreated = receberService.create(receber);
+            return new ResponseEntity<>(receberCreated, HttpStatus.CREATED);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro inesperado: " + ex.getMessage());
+        }
+    
+        // ContasReceber receberCreated = receberService.create(receber);
+        // return new ResponseEntity<>(receberCreated, HttpStatus.CREATED);
     }
 
     // READ ALL

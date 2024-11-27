@@ -27,18 +27,6 @@ public class FornecedorService {
         return fornecedorRepository.findById(id);
     }
 
-    public List<Fornecedor> findAllByName(String name) {
-        return fornecedorRepository.findAllByName(name);
-    }
-
-    public List<Fornecedor> findAllByNameContaining(String name) {
-        return fornecedorRepository.findAllByNameContaining(name);
-    }
-
-    public List<Fornecedor> buscarFornecedoresPorNome(String name) {
-        return fornecedorRepository.buscarFornecedoresPorNome(name);
-    }
-
     @Transactional
     public Fornecedor update(Long id, Fornecedor fornecedor){
         if(!fornecedorRepository.existsById(id)) {

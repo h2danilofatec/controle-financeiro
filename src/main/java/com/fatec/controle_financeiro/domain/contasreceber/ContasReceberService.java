@@ -1,8 +1,12 @@
 package com.fatec.controle_financeiro.domain.contasreceber;
 import com.fatec.controle_financeiro.entities.ContasReceber;
 
+import ch.qos.logback.core.helpers.ThrowableToStringArray;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -16,9 +20,16 @@ public class ContasReceberService {
 
     @Transactional
     public ContasReceber create(ContasReceber receber) {
-        return contasReceberRepository.save(receber);
+        if(receber.getEmissao().isAfter(receber.getVencimento())){
+            throw new IllegalArgumentException("A data de vencimento nao pode ser menor que a data de emissao");
+        }
+        BigDecimal valorZero = BigDecimal.ZERO;
+        if(receber.getValor().compareTo(valorZero) <= 0 ){
+            throw new IllegalArgumentException("O valor nao pode ser 0 ou menor.");
+        }
+        return contasReceberRepository.save(receber);        
     }
-
+    
     public List<ContasReceber> findAll() {
         return contasReceberRepository.findAll();
     }

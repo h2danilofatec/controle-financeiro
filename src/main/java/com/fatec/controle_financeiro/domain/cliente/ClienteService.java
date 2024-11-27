@@ -27,18 +27,6 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-    public List<Cliente> findAllByName(String name) {
-        return clienteRepository.findAllByName(name);
-    }
-
-    public List<Cliente> findAllByNameContaining(String name) {
-        return clienteRepository.findAllByNameContaining(name);
-    }
-
-    public List<Cliente> buscarClienteesPorNome(String name) {
-        return clienteRepository.buscarClientesPorNome(name);
-    }
-
     @Transactional
     public Cliente update(Long id, Cliente Cliente){
         if(!clienteRepository.existsById(id)) {
