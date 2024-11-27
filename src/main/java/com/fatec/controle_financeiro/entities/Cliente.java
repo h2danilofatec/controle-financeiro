@@ -12,7 +12,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O nome do Cliente é obrigatório.")
+    @NotNull
     @Column(nullable = false, length = 60)
     private String name;
 
