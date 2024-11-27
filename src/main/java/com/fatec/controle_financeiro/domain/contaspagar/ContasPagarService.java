@@ -25,11 +25,11 @@ public class ContasPagarService {
             throw new IllegalArgumentException("O fornecedor não pode ser vazio.");
         }
         if(pagar.getEmissao().isAfter(pagar.getVencimento())){
-            throw new IllegalArgumentException("A data de vencimento nao pode ser menor que a data de emissao.");
+            throw new IllegalArgumentException("A data de vencimento não pode ser menor que a data de emissão.");
         }
         BigDecimal valorZero = BigDecimal.ZERO;
-        if (pagar.getValor().compareTo(valorZero) <= 0){
-            throw new IllegalArgumentException("O valor não pode ser 0 ou menor.");
+        if(pagar.getValor().compareTo(valorZero) <= 0 || pagar.getValor() == null){
+            throw new IllegalArgumentException("Valor inválido, o valor deve ser superior à 0 e não pode ser vazio.");
         }
         return contasPagarRepository.save(pagar);
     }

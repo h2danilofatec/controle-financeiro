@@ -25,7 +25,7 @@ public class ContasReceberService {
             throw new IllegalArgumentException("O cliente não pode ser vazio.");
         }
         if(receber.getEmissao().isAfter(receber.getVencimento())){
-            throw new IllegalArgumentException("A data de vencimento nao pode ser menor que a data de emissao.");
+            throw new IllegalArgumentException("A data de vencimento não pode ser menor que a data de emissão.");
         }
         BigDecimal valorZero = BigDecimal.ZERO;
         if(receber.getValor().compareTo(valorZero) <= 0 || receber.getValor() == null){
