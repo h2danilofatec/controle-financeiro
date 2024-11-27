@@ -20,9 +20,15 @@ public class ContasPagarController {
 
     // CREATE
     @PostMapping("/create")
-    public ResponseEntity<ContasPagar> create(@RequestBody ContasPagar pagar) {
-        ContasPagar pagarCreated = pagarService.create(pagar);
-        return new ResponseEntity<>(pagarCreated, HttpStatus.CREATED);
+    public ResponseEntity<?> create(@RequestBody ContasPagar pagar) {
+        try {
+            ContasPagar pagarCreated = pagarService.create(pagar);
+            return new ResponseEntity<>(pagarCreated, HttpStatus.CREATED);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro inesperado: " + ex.getMessage());
+        }
     }
     
     // READ ALL

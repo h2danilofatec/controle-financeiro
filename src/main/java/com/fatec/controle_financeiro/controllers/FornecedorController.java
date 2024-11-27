@@ -20,9 +20,15 @@ public class FornecedorController {
 
     // CREATE    
     @PostMapping("/create")
-    public ResponseEntity<Fornecedor> create(@RequestBody Fornecedor fornecedor) {
-        Fornecedor fornecedorCreated = fornecedorService.create(fornecedor);
-        return new ResponseEntity<>(fornecedorCreated, HttpStatus.CREATED);
+    public ResponseEntity<?> create(@RequestBody Fornecedor fornecedor) {
+        try {
+            Fornecedor fornecedorCreated = fornecedorService.create(fornecedor);
+            return new ResponseEntity<>(fornecedorCreated, HttpStatus.CREATED);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     // READ ALL
@@ -41,22 +47,26 @@ public class FornecedorController {
     
     // UPDATE
     @PutMapping("/update/{id}")
-    public ResponseEntity<Fornecedor> updateFornecedor(@PathVariable Long id, @RequestBody Fornecedor entity) {
+    public ResponseEntity<?> updateFornecedor(@PathVariable Long id, @RequestBody Fornecedor entity) {
         try {
             Fornecedor updated = fornecedorService.update(id, entity);
             return new ResponseEntity<>(updated, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     // DELETE
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteFornecedor(@PathVariable Long id) {
+    public ResponseEntity<?> deleteFornecedor(@PathVariable Long id) {
         try {
             fornecedorService.delete(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

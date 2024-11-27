@@ -16,6 +16,9 @@ public class FornecedorService {
 
    @Transactional
     public Fornecedor create(Fornecedor fornecedor) {
+        if (fornecedor.getName() == null) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
+        }
         return fornecedorRepository.save(fornecedor);
     }
 
