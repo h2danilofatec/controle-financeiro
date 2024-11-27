@@ -17,15 +17,21 @@ public class ContasPagarService {
     }
 
     @Transactional
-    public ContasPagar create(ContasPagar conta) {
-        if (conta.getVencimento().isBefore(conta.getEmissao())) {
-            throw new IllegalArgumentException("A data de vencimento não pode ser menor que a data de emissão");
+    public ContasPagar create(ContasPagar pagar) {
+        if(pagar.getEmissao() == null || pagar.getVencimento() == null){
+            throw new IllegalArgumentException("As datas não podem ser vazias.");
+        }
+        if(pagar.getFornecedor() == null){
+            throw new IllegalArgumentException("O fornecedor não pode ser vazio.");
+        }
+        if(pagar.getEmissao().isAfter(pagar.getVencimento())){
+            throw new IllegalArgumentException("A data de vencimento nao pode ser menor que a data de emissao.");
         }
         BigDecimal valorZero = BigDecimal.ZERO;
-        if (conta.getValor().compareTo(valorZero) <= 0){
+        if (pagar.getValor().compareTo(valorZero) <= 0){
             throw new IllegalArgumentException("O valor não pode ser 0 ou menor.");
         }
-        return contasPagarRepository.save(conta);
+        return contasPagarRepository.save(pagar);
     }
 
     public List<ContasPagar> findAll() {

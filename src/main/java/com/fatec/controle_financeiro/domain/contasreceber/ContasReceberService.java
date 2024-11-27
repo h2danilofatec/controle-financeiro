@@ -1,8 +1,6 @@
 package com.fatec.controle_financeiro.domain.contasreceber;
 import com.fatec.controle_financeiro.entities.ContasReceber;
 
-import ch.qos.logback.core.helpers.ThrowableToStringArray;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

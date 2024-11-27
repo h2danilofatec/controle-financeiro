@@ -13,20 +13,20 @@ public class ContasPagar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "A data de emissão é obrigatória.")
+    @NotNull
     @Column(name = "emissao", nullable = false)
     private LocalDate emissao;
 
-    @NotNull(message = "A data de vencimento é obrigatória.")
+    @NotNull
     @Column(name = "vencimento", nullable = false)
     private LocalDate vencimento;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "fornecedor_id", nullable = false)
-    @NotNull(message = "O Fornecedor é obrigatório.")
     private Fornecedor fornecedor;
 
-    @NotNull(message = "O valor é obrigatório.")
+    @NotNull
     @DecimalMin(value = "0.01", inclusive = true)
     @Column(name = "valor", precision = 12, scale = 2, nullable = false)
     private BigDecimal valor;
@@ -72,5 +72,4 @@ public class ContasPagar {
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-
 }
