@@ -13,20 +13,20 @@ public class ContasReceber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "A data de emissão e obrigatoria.")
+    @NotNull
     @Column(name = "emissao", nullable = false)
     private LocalDate emissao;
 
-    @NotNull(message = "A data de vencimento e obrigatoria.")
+    @NotNull
     @Column(name = "vencimento", nullable = false)
     private LocalDate vencimento;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
-    @NotNull(message = "O cliente e obrigatorio.")
     private Cliente cliente;
 
-    @NotNull(message = "O valor e obrigatorio.")
+    @NotNull
     @DecimalMin(value = "0.01", inclusive = true, message = "O valor deve ser maior que zero.")
     @Column(name = "valor", precision = 12, scale = 2, nullable = false)
     private BigDecimal valor;
